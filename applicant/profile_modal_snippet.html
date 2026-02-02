@@ -1,0 +1,141 @@
+<!-- This is the new modal HTML to replace the old profileEdit div -->
+<!-- Profile Edit Modal -->
+<div class="profile-modal-overlay" id="profileModalOverlay" onclick="closeProfileModal()"></div>
+<div class="profile-modal" id="profileModal">
+  <div class="profile-modal-header">
+    <h2>Edit Profile</h2>
+    <button class="profile-modal-close" onclick="closeProfileModal()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  
+  <div class="profile-modal-body">
+    <!-- Personal Details Section -->
+    <div class="profile-section" id="personalSection">
+      <div class="profile-section-header">
+        <h3>Personal Details</h3>
+        <button class="profile-edit-icon" onclick="editSection('personal')">
+          <i class="fa-solid fa-pen"></i>
+        </button>
+      </div>
+      <div class="profile-section-content" id="personalContent">
+        <div><strong>Name:</strong> <span id="displayFullName"></span></div>
+        <div><strong>Contact:</strong> <span id="displayPhone"></span></div>
+      </div>
+      <div class="profile-section-form" id="personalForm">
+        <div class="profile-form-row">
+          <div class="profile-form-group">
+            <label>First Name</label>
+            <input type="text" id="modal_first">
+          </div>
+          <div class="profile-form-group">
+            <label>Middle Name</label>
+            <input type="text" id="modal_middle">
+          </div>
+        </div>
+        <div class="profile-form-group">
+          <label>Last Name</label>
+          <input type="text" id="modal_last">
+        </div>
+        <div class="profile-form-group">
+          <label>Contact Number</label>
+          <input type="text" id="modal_phone" maxlength="11" placeholder="09XXXXXXXXX">
+        </div>
+        <div class="profile-form-actions">
+          <button class="profile-form-cancel" onclick="cancelEdit('personal')">Cancel</button>
+          <button class="profile-form-save" onclick="saveEdit('personal')">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Location Section -->
+    <div class="profile-section" id="locationSection">
+      <div class="profile-section-header">
+        <h3>Location</h3>
+        <button class="profile-edit-icon" onclick="editSection('location')">
+          <i class="fa-solid fa-pen"></i>
+        </button>
+      </div>
+      <div class="profile-section-content" id="locationContent">
+        <span id="displayLocation"></span>
+      </div>
+      <div class="profile-section-form" id="locationForm">
+        <div class="profile-form-group">
+          <label>Municipality</label>
+          <select id="modal_municipality">
+            <option value="">Select Municipality</option>
+          </select>
+        </div>
+        <div class="profile-form-group">
+          <label>Barangay</label>
+          <select id="modal_barangay" disabled>
+            <option value="">Select Barangay</option>
+          </select>
+        </div>
+        <div class="profile-form-group">
+          <label>House No. / Street (Optional)</label>
+          <input type="text" id="modal_street" placeholder="e.g., 123 Main Street">
+        </div>
+        <div class="profile-form-actions">
+          <button class="profile-form-cancel" onclick="cancelEdit('location')">Cancel</button>
+          <button class="profile-form-save" onclick="saveEdit('location')">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Socials Section -->
+    <div class="profile-section" id="socialsSection">
+      <div class="profile-section-header">
+        <h3>Social Media</h3>
+        <button class="profile-edit-icon" onclick="editSection('socials')">
+          <i class="fa-solid fa-pen"></i>
+        </button>
+      </div>
+      <div class="profile-section-content" id="socialsContent">
+        <div id="displaySocials">No social media links added</div>
+      </div>
+      <div class="profile-section-form" id="socialsForm">
+        <div class="profile-form-group">
+          <label><i class="fa-brands fa-facebook"></i> Facebook Profile URL</label>
+          <input type="url" id="modal_facebook" placeholder="https://facebook.com/yourprofile">
+        </div>
+        <div class="profile-form-group">
+          <label><i class="fa-brands fa-linkedin"></i> LinkedIn Profile URL</label>
+          <input type="url" id="modal_linkedin" placeholder="https://linkedin.com/in/yourprofile">
+        </div>
+        <div class="profile-form-actions">
+          <button class="profile-form-cancel" onclick="cancelEdit('socials')">Cancel</button>
+          <button class="profile-form-save" onclick="saveEdit('socials')">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Summary Section -->
+    <div class="profile-section" id="summarySection">
+      <div class="profile-section-header">
+        <h3>About Me</h3>
+        <button class="profile-edit-icon" onclick="editSection('summary')">
+          <i class="fa-solid fa-pen"></i>
+        </button>
+      </div>
+      <div class="profile-section-content" id="summaryContent">
+        <span id="displayBio">Tell us about yourself...</span>
+      </div>
+      <div class="profile-section-form" id="summaryForm">
+        <div class="profile-form-group">
+          <label>Bio / About Me</label>
+          <textarea id="modal_bio" rows="5" placeholder="Write a brief introduction about yourself..."></textarea>
+        </div>
+        <div class="profile-form-actions">
+          <button class="profile-form-cancel" onclick="cancelEdit('summary')">Cancel</button>
+          <button class="profile-form-save" onclick="saveEdit('summary')">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-modal-footer">
+    <button class="profile-modal-cancel" onclick="closeProfileModal()">Close</button>
+    <button class="profile-modal-submit" onclick="saveAllProfileChanges()">Save All Changes</button>
+  </div>
+</div>

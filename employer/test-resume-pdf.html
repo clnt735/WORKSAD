@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Resume PDF Generator - WorkMuna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #2563eb;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #475569;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+        }
+        
+        .info-box h3 {
+            color: #1e40af;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .info-box p {
+            color: #475569;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 24px;
+        }
+        
+        .warning-box h3 {
+            color: #92400e;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .warning-box p {
+            color: #78350f;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #dcfce7;
+            color: #166534;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-top: 12px;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            color: #475569;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: #16a34a;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        .code-snippet {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin-top: 12px;
+            overflow-x: auto;
+        }
+        
+        @media (max-width: 640px) {
+            .container {
+                padding: 24px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="status">✓ System Ready</span>
+        <h1>🎯 Resume PDF Generator</h1>
+        <p class="subtitle">Test the resume PDF generation system</p>
+        
+        <div class="info-box">
+            <h3>📋 What This Does</h3>
+            <p>Generates a professional PDF resume for matched applicants. The system fetches data from the resume builder and creates a beautifully formatted document.</p>
+            <ul class="feature-list">
+                <li>Verifies employer-applicant match</li>
+                <li>Fetches complete resume data</li>
+                <li>Generates PDF with Dompdf</li>
+                <li>Uses DejaVu Sans font</li>
+            </ul>
+        </div>
+        
+        <form action="download-resume.php" method="GET">
+            <div class="form-group">
+                <label for="applicant_id">Enter Applicant User ID:</label>
+                <input 
+                    type="number" 
+                    id="applicant_id" 
+                    name="applicant_id" 
+                    placeholder="e.g., 10" 
+                    required
+                    min="1"
+                >
+            </div>
+            
+            <button type="submit" class="btn">
+                Generate Resume PDF →
+            </button>
+        </form>
+        
+        <div class="warning-box">
+            <h3>⚠️ Important Notes</h3>
+            <p><strong>Download is currently disabled.</strong> The system will show a success page with resume data summary. To enable PDF download, uncomment the stream option in <code>download-resume.php</code>.</p>
+            
+            <div class="code-snippet">
+// Uncomment to enable download:
+$dompdf->stream("resume_...", [
+    "Attachment" => true
+]);
+            </div>
+        </div>
+        
+        <div class="info-box" style="margin-top: 24px; background: #f0fdf4; border-left-color: #16a34a;">
+            <h3>✓ Requirements Met</h3>
+            <p>All requirements have been implemented:</p>
+            <ul class="feature-list">
+                <li>Dompdf dependency installed</li>
+                <li>Match verification with isMatched()</li>
+                <li>Resume data fetching</li>
+                <li>HTML template with inline CSS</li>
+                <li>DejaVu Sans font usage</li>
+                <li>No JavaScript or external CSS</li>
+                <li>Read-only employer access</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

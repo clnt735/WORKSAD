@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Notification Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; border-bottom: 3px solid #007bff; padding-bottom: 10px; }
+        .test-section { margin: 20px 0; padding: 20px; background: #f8f9fa; border-left: 4px solid #007bff; }
+        .test-section h3 { margin-top: 0; color: #007bff; }
+        button { background: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px; }
+        button:hover { background: #0056b3; }
+        .success { color: #28a745; font-weight: bold; }
+        .error { color: #dc3545; font-weight: bold; }
+        .info { color: #17a2b8; }
+        #results { margin-top: 20px; padding: 15px; background: #fff; border: 1px solid #ddd; border-radius: 5px; min-height: 100px; }
+        .loading { text-align: center; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #007bff; color: white; }
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 12px; }
+        .badge-like { background: #fce7f3; color: #ec4899; }
+        .badge-match { background: #dcfce7; color: #22c55e; }
+        .badge-interview { background: #dbeafe; color: #3b82f6; }
+        .badge-read { background: #e5e7eb; color: #6b7280; }
+        .badge-unread { background: #fee2e2; color: #dc2626; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔔 Live Notification System Test</h1>
+        
+        <div class="test-section">
+            <h3>📊 Real-Time Notification Monitor</h3>
+            <p>This page will show you notifications as they are created in the database.</p>
+            <button onclick="checkNotifications()">🔄 Refresh Notifications</button>
+            <button onclick="clearTestData()">🗑️ Clear Test Data</button>
+            <button onclick="autoRefresh()">▶️ Start Auto-Refresh (5s)</button>
+            <button onclick="stopAutoRefresh()">⏸️ Stop Auto-Refresh</button>
+        </div>
+
+        <div id="results">
+            <div class="loading">Click "Refresh Notifications" to check current status...</div>
+        </div>
+
+        <div class="test-section">
+            <h3>✅ Testing Instructions:</h3>
+            <ol>
+                <li><strong>Start Auto-Refresh</strong> above (checks every 5 seconds)</li>
+                <li><strong>Open another tab/window</strong> and log in to your application</li>
+                <li><strong>Perform actions:</strong>
+                    <ul>
+                        <li>Like a job post (as applicant)</li>
+                        <li>Like an applicant (as employer)</li>
+                        <li>Create a match (mutual likes)</li>
+                        <li>Schedule an interview</li>
+                    </ul>
+                </li>
+                <li><strong>Watch this page</strong> - notifications should appear in real-time!</li>
+                <li><strong>Then test the UI:</strong> Click the notification bell in your application</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        let autoRefreshInterval = null;
+
+        async function checkNotifications() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="loading">Loading...</div>';
+
+            try {
+                const response = await fetch('check_notifications_status.php');
+                const data = await response.json();
+                
+                let html = '<h4>📈 Notification Statistics:</h4>';
+                html += '<p><strong>Total Notifications:</strong> <span class="' + (data.total > 0 ? 'success' : 'error') + '">' + data.total + '</span></p>';
+                html += '<p><strong>Unread:</strong> <span class="info">' + data.unread + '</span></p>';
+                html += '<p><strong>Last Updated:</strong> ' + new Date().toLocaleTimeString() + '</p>';
+
+                if (data.total > 0) {
+                    html += '<h4>Recent Notifications:</h4>';
+                    html += '<table><thead><tr><th>ID</th><th>Receiver</th><th>Type</th><th>Title</th><th>Status</th><th>Created</th></tr></thead><tbody>';
+                    
+                    data.notifications.forEach(notif => {
+                        const typeClass = 'badge-' + notif.notification_type;
+                        const statusClass = notif.is_read == '1' ? 'badge-read' : 'badge-unread';
+                        html += '<tr>';
+                        html += '<td>' + notif.notification_id + '</td>';
+                        html += '<td>' + notif.receiver_id + ' <small>(' + notif.receiver_type + ')</small></td>';
+                        html += '<td><span class="badge ' + typeClass + '">' + notif.notification_type + '</span></td>';
+                        html += '<td>' + notif.title + '</td>';
+                        html += '<td><span class="badge ' + statusClass + '">' + (notif.is_read == '1' ? 'Read' : 'Unread') + '</span></td>';
+                        html += '<td>' + notif.created_at + '</td>';
+                        html += '</tr>';
+                    });
+                    
+                    html += '</tbody></table>';
+                } else {
+                    html += '<p class="error">⚠️ No notifications found. Perform a like/match/interview action to test.</p>';
+                }
+
+                resultsDiv.innerHTML = html;
+            } catch (error) {
+                resultsDiv.innerHTML = '<p class="error">❌ Error: ' + error.message + '</p>';
+            }
+        }
+
+        async function clearTestData() {
+            if (!confirm('Clear test notification (ID 999)? This will not delete real notifications.')) return;
+            
+            try {
+                const response = await fetch('check_notifications_status.php?action=clear');
+                const data = await response.json();
+                alert(data.message);
+                checkNotifications();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function autoRefresh() {
+            if (autoRefreshInterval) {
+                alert('Auto-refresh is already running!');
+                return;
+            }
+            
+            checkNotifications(); // Check immediately
+            autoRefreshInterval = setInterval(checkNotifications, 5000);
+            alert('Auto-refresh started! Checking every 5 seconds...');
+        }
+
+        function stopAutoRefresh() {
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+                autoRefreshInterval = null;
+                alert('Auto-refresh stopped.');
+            } else {
+                alert('Auto-refresh is not running.');
+            }
+        }
+
+        // Initial check
+        checkNotifications();
+    </script>
+</body>
+</html>
