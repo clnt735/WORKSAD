@@ -72,4 +72,4 @@ To run this project locally, follow these steps:
 ## 🎓 About the Project
 This project was developed as a Capstone for **System Analysis and Design (SAD101)**. Our mission was to solve local unemployment by providing a modernized, secure, and user-friendly platform for the citizens of Bayambang.
 
-**Developed by:** [Your Name/Team Name]
+**Developed by:** [Maslog, Clint John C.]
