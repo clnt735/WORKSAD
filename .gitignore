@@ -1,0 +1,78 @@
+# Ignore dependency folders
+/vendor/
+/node_modules/
+
+# Ignore sensitive configuration files (CRITICAL)
+.env
+config.php
+connection.php
+database.php
+
+# Ignore user uploads (can be large)
+/uploads/
+!/uploads/.gitkeep
+
+# Ignore temporary files and logs
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Ignore XAMPP/Local environment specific files
+php_errors.log
+php.ini
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+*.sublime-*
+
+# Ignore backup and database files
+*.sql
+*.sql.gz
+*.backup
+*.bak
+
+# Ignore OS specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# Test and debug files
+test_*.php
+test_*.html
+test-*.html
+**/test_*.php
+**/test_*.html
+**/test-*.html
+check_*.php
+debug_*.php
+verify_*.php
+**/debug_*.php
+temp_*.js
+**/temp_*.js
+
+# Migration scripts (after one-time use)
+**/migrate_*.php
+profile_modal_snippet.html
+
+# Utility scripts
+generate_pw.php
+send_test_email.php
+
+# HTML status/test pages
+notification_status.html
+live_notification_test.html
+
+# SQL migration files (keep in /migrations/ only)
+/*.sql
+
+# Redundant documentation (keep main README only)
+IMPLEMENTATION_*.md
+QUICKSTART_*.md
+RESUME_PDF_*.md
+PROFILE_MODAL_README.md
+TEST_DATA_REFERENCE.md
+TESTING_CHECKLIST.md
