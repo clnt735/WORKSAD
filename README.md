@@ -17,7 +17,7 @@ No more endless scrolling. WorkMuna features a custom matching engine that:
 * **Job Seekers:** Swipe right to apply to interesting roles; swipe left to skip.
 * **Employers:** Swipe right on candidate profiles that catch your eye; swipe left to move on.
 
-### 📄 Integrated Resume Builder
+###  Integrated Resume Builder
 A built-in tool that allows applicants to generate a professional resume directly within the platform, ensuring their data is perfectly formatted for the matching algorithm.
 
 ---
