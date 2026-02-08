@@ -1,7 +1,7 @@
 # WorkMuna (WORKSAD) 
 **Innovating Job Matching in Bayambang, Pangasinan**
 
-WorkMuna is a gamified, full-stack job platform developed for **System Analysis and Design (SAD101)**. It reimagines the traditional job search by using a "swipe-based" interface—similar to modern dating apps—to make connecting employers and job seekers in Bayambang fun, fast, and efficient.
+WorkMuna is a gamified, full-stack job platform developed for **System Analysis and Design (SAD101)**. It reimagines the traditional job search by using a "swipe-based" interface similar to modern dating apps to make connecting employers and job seekers in Bayambang fun, fast, and efficient.
 
 ---
 
@@ -31,34 +31,7 @@ A built-in tool that allows applicants to generate a professional resume directl
 
 ---
 
-##  Installation & Setup
-
-To run this project locally, follow these steps:
-
-1.  **Clone the Repository:**
-    ```bash
-    git clone [https://github.com/clnt735/WORKSAD.git](https://github.com/clnt735/WORKSAD.git)
-    ```
-2.  **Server Setup:**
-    * Ensure you have **XAMPP** installed.
-    * Move the project folder to `C:/xampp/htdocs/WORKSAD`.
-3.  **Database Configuration:**
-    * Open **phpMyAdmin**.
-    * Create a new database named `worksad`.
-    * Import the provided file: `worksad (25).sql`.
-4.  **Launch:**
-    * Start Apache and MySQL in XAMPP.
-    * Navigate to `http://localhost/WORKSAD` in your browser.
-
----
-
-##  Security
-* **Admin Gatekeeping:** All employer accounts must be manually reviewed and approved by an admin to prevent fraudulent postings.
-* **Verification:** Secure email verification for all new users.
-
----
-
 ##  About the Project
-This project was developed as a Capstone for **System Analysis and Design (SAD101)**. Our mission was to solve local unemployment by providing a modernized, secure, and user-friendly platform for the citizens of Bayambang.
+This project was developed as a project for **System Analysis and Design (SAD101)**. Our mission was to make job matching easier and more fun by providing a modernized, secure, and user-friendly platform for the citizens of Bayambang.
 
 **Developed by:** [Maslog, Clint John C.]
