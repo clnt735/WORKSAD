@@ -76,3 +76,6 @@ RESUME_PDF_*.md
 PROFILE_MODAL_README.md
 TEST_DATA_REFERENCE.md
 TESTING_CHECKLIST.md
+
+# Ignore the images folder
+images/
